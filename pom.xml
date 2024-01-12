@@ -15,7 +15,7 @@
     <version>1.0.0-SNAPSHOT</version>
 
     <name>${project.artifactId}</name>
-    <url>https://github.com/InternalErrorProjects/tasks-server</url>
+    <url>https://github.com/InternalErrorGit/tasks-server</url>
 
     <properties>
         <!-- Dependencies -->
@@ -33,6 +33,7 @@
         <!-- Plugins -->
         <spring-boot-maven-plugin.version>3.2.0</spring-boot-maven-plugin.version>
         <jacoco-maven-plugin.version>0.8.10</jacoco-maven-plugin.version>
+        <maven-surefire-plugin.version>3.0.0</maven-surefire-plugin.version>
 
         <!-- Other -->
         <java.version>17</java.version>
@@ -99,6 +100,16 @@
     <build>
         <plugins>
             <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>${maven-surefire-plugin.version}</version>
+                <configuration>
+                    <excludes>
+                        <exclude>net/internalerror/test/suites</exclude>
+                    </excludes>
+                </configuration>
+            </plugin>
+            <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <version>${spring-boot-maven-plugin.version}</version>
@@ -109,8 +120,8 @@
                 <version>${jacoco-maven-plugin.version}</version>
                 <configuration>
                     <excludes>
-                        <exclude>net.internalerror.rest.Messages.*</exclude>
-                        <exclude>net.internalerror.rest.exception.ValidationException.*</exclude>
+                        <exclude>net/internalerror/rest/Messages.*</exclude>
+                        <exclude>net/internalerror/rest/exception/ValidationException.*</exclude>
                     </excludes>
                 </configuration>
                 <executions>
