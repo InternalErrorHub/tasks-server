@@ -57,4 +57,5 @@ public class Messages {
 
     public static final String DUE_INFO_IS_NULL = "DUE_INFO_IS_NULL";
 
+    public static final String UNAUTHORIZED_REQUEST = "UNAUTHORIZED_REQUEST";
 }

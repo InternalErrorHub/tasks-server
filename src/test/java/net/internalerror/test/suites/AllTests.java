@@ -1,15 +1,21 @@
 package net.internalerror.test.suites;
 
-import lombok.Generated;
+import net.internalerror.TasksServer;
+import org.junit.jupiter.api.Test;
 import org.junit.platform.suite.api.SelectClasses;
 import org.junit.platform.suite.api.Suite;
 
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
+
 @Suite
-@Generated
 @SelectClasses({
         AllControllerTests.class,
         AllServiceTests.class,
         AllRequestTests.class
 })
 public class AllTests {
+    @Test
+    void test() {
+        assertDoesNotThrow(() -> TasksServer.main(new String[]{}));
+    }
 }

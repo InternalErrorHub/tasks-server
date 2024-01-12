@@ -7,6 +7,8 @@ import net.internalerror.data.entity.SecurityToken;
 import net.internalerror.data.entity.User;
 import net.internalerror.data.repository.SecurityTokenRepository;
 import net.internalerror.data.repository.UserRepository;
+import net.internalerror.rest.Messages;
+import net.internalerror.rest.exception.ValidationException;
 import net.internalerror.rest.request.SecuredRequestBase;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -43,7 +45,7 @@ public class SecurityService {
 
     public void checkToken(SecuredRequestBase securedRequest) {
         if (!isAuthorized(securedRequest.getToken())) {
-            // TODO: Throw exception
+            throw new ValidationException(Messages.UNAUTHORIZED_REQUEST);
         }
     }
 
