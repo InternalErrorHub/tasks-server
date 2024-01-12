@@ -2,7 +2,6 @@ package net.internalerror.rest.controller;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import net.internalerror.rest.Routes;
 import net.internalerror.rest.definition.UserControllerDefinition;
 import net.internalerror.rest.request.user.UpdateUserRequest;
 import net.internalerror.rest.response.user.UpdateUserResponse;

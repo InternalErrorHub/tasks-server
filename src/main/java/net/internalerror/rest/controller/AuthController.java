@@ -4,7 +4,6 @@ import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import net.internalerror.data.repository.UserRepository;
 import net.internalerror.rest.Messages;
-import net.internalerror.rest.Routes;
 import net.internalerror.rest.definition.AuthControllerDefinition;
 import net.internalerror.rest.exception.ValidationException;
 import net.internalerror.rest.request.auth.LoginRequest;
