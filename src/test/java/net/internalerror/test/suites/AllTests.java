@@ -13,7 +13,7 @@ import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
         AllServiceTests.class,
         AllRequestTests.class
 })
-public class AllTests {
+class AllTests {
     @Test
     void test() {
         assertDoesNotThrow(() -> TasksServer.main(new String[]{}));

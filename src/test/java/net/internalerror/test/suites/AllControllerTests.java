@@ -9,7 +9,7 @@ import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 
 @Suite
 @SelectPackages("net.internalerror.rest.controller")
-public class AllControllerTests {
+class AllControllerTests {
 
     @Test
     void test() {

@@ -9,7 +9,7 @@ import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 
 @Suite
 @SelectPackages("net.internalerror.rest.request")
-public class AllRequestTests {
+class AllRequestTests {
     @Test
     void test() {
         assertDoesNotThrow(() -> TasksServer.main(new String[]{}));
