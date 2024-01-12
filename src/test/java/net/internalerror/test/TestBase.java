@@ -15,15 +15,7 @@ public abstract class TestBase extends Assertions {
     protected static final int TEST_RUNS = 7;
 
     protected static void assertEqualsInstant(Instant a, Instant b) {
-
         assertEquals(a.getEpochSecond(), b.getEpochSecond());
-
-        // assertEquals(ChronoField.YEAR.getFrom(a),ChronoField.YEAR.getFrom(a));
-        // assertEquals(ChronoField.MONTH_OF_YEAR.getFrom(a),ChronoField.MONTH_OF_YEAR.getFrom(a));
-        // assertEquals(ChronoField.DAY_OF_MONTH.getFrom(a),ChronoField.DAY_OF_MONTH.getFrom(a));
-        // assertEquals(ChronoField.HOUR_OF_DAY.getFrom(a),ChronoField.HOUR_OF_DAY.getFrom(a));
-        // assertEquals(ChronoField.MINUTE_OF_HOUR.getFrom(a),ChronoField.MINUTE_OF_HOUR.getFrom(a));
-        // assertEquals(ChronoField.SECOND_OF_MINUTE.getFrom(a),ChronoField.SECOND_OF_MINUTE.getFrom(a));
     }
 
     @BeforeEach
@@ -31,7 +23,7 @@ public abstract class TestBase extends Assertions {
         String clazz = testInfo.getTestClass().orElseThrow().getName();
         String method = testInfo.getTestMethod().orElseThrow().getName();
 
-        log.info("Running test: {}::{}", clazz, method);
+        log.debug("Running test: {}::{}", clazz, method);
     }
 
 }

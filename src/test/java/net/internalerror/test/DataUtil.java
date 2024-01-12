@@ -35,20 +35,20 @@ public class DataUtil {
         registerRequest.setPassword("Passwd@123");
 
         assertDoesNotThrow(() -> authController.register(registerRequest));
-        log.info("Registered test user: ");
-        log.info("\tFirstname: {}", registerRequest.getFirstname());
-        log.info("\tLastname: {}", registerRequest.getLastname());
-        log.info("\tEmail: {}", registerRequest.getEmail());
-        log.info("\tPassword: {}", registerRequest.getPassword());
+        log.debug("Registered test user: ");
+        log.debug("\tFirstname: {}", registerRequest.getFirstname());
+        log.debug("\tLastname: {}", registerRequest.getLastname());
+        log.debug("\tEmail: {}", registerRequest.getEmail());
+        log.debug("\tPassword: {}", registerRequest.getPassword());
 
         LoginRequest loginRequest = new LoginRequest();
         loginRequest.setEmail(registerRequest.getEmail());
         loginRequest.setPassword(registerRequest.getPassword());
 
         LoginResponse loginResponse = assertDoesNotThrow(() -> authController.login(loginRequest));
-        log.info("Logged in test user: ");
-        log.info("\tEmail: {}", loginRequest.getEmail());
-        log.info("\tToken: {}", loginResponse.token());
+        log.debug("Logged in test user: ");
+        log.debug("\tEmail: {}", loginRequest.getEmail());
+        log.debug("\tToken: {}", loginResponse.token());
 
         return new TestCredentials(registerRequest.getEmail(), loginResponse.token());
     }
@@ -65,10 +65,10 @@ public class DataUtil {
         createTaskRequest.setDue(due);
         createTaskRequest.setToken(credentials.token());
 
-        log.info("Created test task: ");
-        log.info("\tName: {}", createTaskRequest.getName());
-        log.info("\tDetails: {}", createTaskRequest.getDetails());
-        log.info("\tDue: {}", createTaskRequest.getDue());
+        log.debug("Created test task: ");
+        log.debug("\tName: {}", createTaskRequest.getName());
+        log.debug("\tDetails: {}", createTaskRequest.getDetails());
+        log.debug("\tDue: {}", createTaskRequest.getDue());
 
         taskController.create(createTaskRequest);
 

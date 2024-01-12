@@ -27,7 +27,7 @@ public abstract class CleanDatabaseTestBase extends TestBase {
 
     @BeforeEach
     public void cleanDatabase() {
-        log.info("Cleaning Database for new Test execution");
+        log.debug("Cleaning Database for new Test execution");
         taskRepository.deleteAll();
         securityTokenRepository.deleteAll();
         userRepository.deleteAll();

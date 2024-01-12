@@ -25,7 +25,7 @@ public abstract class ControllerTestBase extends CleanDatabaseTestBase {
 
     protected static void assertThrowsValidationException(String message, Executable executable) {
         ValidationException exception = assertThrows(ValidationException.class, executable);
-        log.info("Expected exception was thrown: {}", exception.getMessage(), exception);
+        log.debug("Expected exception was thrown: {}", exception.getMessage(), exception);
         assertEquals(message, exception.getMessage());
     }
 
