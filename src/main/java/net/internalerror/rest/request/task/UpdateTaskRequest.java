@@ -11,7 +11,6 @@ import net.internalerror.rest.request.SecuredRequestBase;
 
 import java.time.Instant;
 
-@ToString
 @Getter
 @Setter
 public class UpdateTaskRequest extends SecuredRequestBase {

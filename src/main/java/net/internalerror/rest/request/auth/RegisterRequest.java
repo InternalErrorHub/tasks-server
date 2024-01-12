@@ -10,7 +10,6 @@ import net.internalerror.ServerUtil;
 import net.internalerror.rest.Messages;
 import net.internalerror.rest.request.RequestBase;
 
-@ToString
 @Getter
 @Setter
 public class RegisterRequest extends RequestBase {
@@ -28,7 +27,6 @@ public class RegisterRequest extends RequestBase {
     @Email(message = Messages.EMAIL_IS_INVALID, regexp = ServerUtil.EMAIL_REGEX)
     private String email;
 
-    @ToString.Exclude
     @NotNull(message = Messages.PASSWORD_IS_NULL)
     @NotEmpty(message = Messages.PASSWORD_IS_EMPTY)
     private String password;

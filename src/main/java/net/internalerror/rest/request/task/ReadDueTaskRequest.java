@@ -9,7 +9,6 @@ import net.internalerror.rest.request.SecuredRequestBase;
 
 import java.time.temporal.TemporalUnit;
 
-@ToString
 @Getter
 @Setter
 public class ReadDueTaskRequest extends SecuredRequestBase {

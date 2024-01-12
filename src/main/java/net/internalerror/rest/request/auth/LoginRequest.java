@@ -8,7 +8,6 @@ import lombok.ToString;
 import net.internalerror.rest.Messages;
 import net.internalerror.rest.request.RequestBase;
 
-@ToString
 @Getter
 @Setter
 public class LoginRequest extends RequestBase {
@@ -17,7 +16,6 @@ public class LoginRequest extends RequestBase {
     @NotEmpty(message = Messages.EMAIL_IS_EMPTY)
     private String email;
 
-    @ToString.Exclude
     @NotNull(message = Messages.PASSWORD_IS_NULL)
     @NotEmpty(message = Messages.PASSWORD_IS_EMPTY)
     private String password;

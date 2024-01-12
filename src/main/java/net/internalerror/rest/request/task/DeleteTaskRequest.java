@@ -8,7 +8,6 @@ import lombok.ToString;
 import net.internalerror.rest.Messages;
 import net.internalerror.rest.request.SecuredRequestBase;
 
-@ToString
 @Getter
 @Setter
 public class DeleteTaskRequest extends SecuredRequestBase {

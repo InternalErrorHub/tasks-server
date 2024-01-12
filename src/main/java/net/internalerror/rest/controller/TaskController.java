@@ -27,7 +27,6 @@ public class TaskController implements TaskControllerDefinition {
 
     @Override
     public CreateTaskResponse create(CreateTaskRequest request) {
-        log.debug("{}: {}", Routes.TASK_CREATE, request);
         securityService.checkToken(request);
         User user = securityService.getUser(request);
         if (taskRepository.existsByUserAndNameIgnoreCase(user, request.getName())) {
@@ -38,7 +37,6 @@ public class TaskController implements TaskControllerDefinition {
 
     @Override
     public ReadTaskResponse read(ReadTaskRequest request) {
-        log.debug("{}: {}", Routes.TASK_READ, request);
         securityService.checkToken(request);
         User user = securityService.getUser(request);
         if (!taskRepository.existsByUserAndNameIgnoreCase(user, request.getName())) {
@@ -49,21 +47,18 @@ public class TaskController implements TaskControllerDefinition {
 
     @Override
     public ReadAllTaskResponse readAll(ReadAllTaskRequest request) {
-        log.debug("{}: {}", Routes.TASK_READ_ALL, request);
         securityService.checkToken(request);
         return taskService.readAll(request);
     }
 
     @Override
     public ReadDueTaskResponse readDue(ReadDueTaskRequest request) {
-        log.debug("{}: {}", Routes.TASK_READ_DUE, request);
         securityService.checkToken(request);
         return taskService.readDue(request);
     }
 
     @Override
     public UpdateTaskResponse update(UpdateTaskRequest request) {
-        log.debug("{}: {}", Routes.TASK_UPDATE, request);
         securityService.checkToken(request);
         User user = securityService.getUser(request);
         if (!taskRepository.existsByUserAndNameIgnoreCase(user, request.getName())) {
@@ -77,7 +72,6 @@ public class TaskController implements TaskControllerDefinition {
 
     @Override
     public DeleteTaskResponse delete(DeleteTaskRequest request) {
-        log.debug("{}: {}", Routes.TASK_DELETE, request);
         securityService.checkToken(request);
         User user = securityService.getUser(request);
         if (!taskRepository.existsByUserAndNameIgnoreCase(user, request.getName())) {

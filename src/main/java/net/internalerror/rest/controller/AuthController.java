@@ -28,7 +28,6 @@ public class AuthController implements AuthControllerDefinition {
 
     @Override
     public RegisterResponse register(RegisterRequest request) {
-        log.debug("{}: {}", Routes.AUTH_REGISTER, request);
 
         if (userRepository.existsByEmail(request.getEmail())) {
             throw new ValidationException(Messages.EMAIL_IS_UNAVAILABLE);
@@ -41,7 +40,6 @@ public class AuthController implements AuthControllerDefinition {
 
     @Override
     public LoginResponse login(LoginRequest request) {
-        log.debug("{}: {}", Routes.AUTH_LOGIN, request);
 
         if (!userRepository.existsByEmail(request.getEmail())) {
             throw new ValidationException(Messages.EMAIL_IS_UNREGISTERED);

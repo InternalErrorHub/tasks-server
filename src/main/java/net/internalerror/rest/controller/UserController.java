@@ -21,7 +21,6 @@ public class UserController implements UserControllerDefinition {
 
     @Override
     public UpdateUserResponse update(UpdateUserRequest request) {
-        log.debug("{}: {}", Routes.USER_UPDATE, request);
         securityService.checkToken(request);
         return userService.update(request);
     }
