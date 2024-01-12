@@ -105,7 +105,7 @@
                 <version>${maven-surefire-plugin.version}</version>
                 <configuration>
                     <excludes>
-                        <exclude>net/internalerror/test/suites</exclude>
+                        <exclude>net/internalerror/test/suites/**</exclude>
                     </excludes>
                 </configuration>
             </plugin>
@@ -121,7 +121,10 @@
                 <configuration>
                     <excludes>
                         <exclude>net/internalerror/rest/Messages.*</exclude>
+                        <exclude>net/internalerror/rest/Routes.*</exclude>
                         <exclude>net/internalerror/rest/exception/ValidationException.*</exclude>
+                        <exclude>net/internalerror/TasksServer.*</exclude>
+                        <exclude>net/internalerror/data/**</exclude>
                     </excludes>
                 </configuration>
                 <executions>
@@ -145,8 +148,8 @@
     <distributionManagement>
         <repository>
             <id>github</id>
-            <name>GitHub InternalErrorProjects Apache Maven Packages</name>
-            <url>https://maven.pkg.github.com/InternalErrorProjects/tasks-server</url>
+            <name>GitHub InternalErrorGit Apache Maven Packages</name>
+            <url>https://maven.pkg.github.com/InternalErrorGit/tasks-server</url>
         </repository>
     </distributionManagement>
 
