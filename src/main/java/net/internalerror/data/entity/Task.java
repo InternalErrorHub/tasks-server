@@ -1,14 +1,12 @@
 package net.internalerror.data.entity;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import net.internalerror.data.base.EntityBase;
 
 import java.time.Instant;
 
+@Generated
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter

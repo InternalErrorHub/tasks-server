@@ -1,7 +1,9 @@
 package net.internalerror.rest;
 
+import lombok.Generated;
 import lombok.experimental.UtilityClass;
 
+@Generated
 @UtilityClass
 public class Messages {
 

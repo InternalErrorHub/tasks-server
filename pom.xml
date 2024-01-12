@@ -118,15 +118,6 @@
                 <groupId>org.jacoco</groupId>
                 <artifactId>jacoco-maven-plugin</artifactId>
                 <version>${jacoco-maven-plugin.version}</version>
-                <configuration>
-                    <excludes>
-                        <exclude>net/internalerror/rest/Messages.*</exclude>
-                        <exclude>net/internalerror/rest/Routes.*</exclude>
-                        <exclude>net/internalerror/rest/exception/ValidationException.*</exclude>
-                        <exclude>net/internalerror/TasksServer.*</exclude>
-                        <exclude>net/internalerror/data/**</exclude>
-                    </excludes>
-                </configuration>
                 <executions>
                     <execution>
                         <goals>
