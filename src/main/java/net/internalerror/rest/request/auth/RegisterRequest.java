@@ -11,7 +11,7 @@ import net.internalerror.rest.request.RequestBase;
 
 @Getter
 @Setter
-public class RegisterRequest extends RequestBase {
+public class RegisterRequest implements RequestBase {
 
     @NotNull(message = Messages.FIRSTNAME_IS_NULL)
     @NotEmpty(message = Messages.FIRSTNAME_IS_EMPTY)

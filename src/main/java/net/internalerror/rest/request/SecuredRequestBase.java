@@ -7,7 +7,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public abstract class SecuredRequestBase extends RequestBase {
+public abstract class SecuredRequestBase implements RequestBase {
 
     @NotNull(message = "TOKEN_IS_NULL")
     @NotEmpty(message = "TOKEN_IS_EMPTY")

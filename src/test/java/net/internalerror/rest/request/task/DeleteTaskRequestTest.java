@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.function.BiConsumer;
 
-public class DeleteTaskRequestTest extends SecuredRequestTestBase<DeleteTaskRequest> {
+class DeleteTaskRequestTest extends SecuredRequestTestBase<DeleteTaskRequest> {
 
     @Override
     protected Class<DeleteTaskRequest> getRequestClass() {

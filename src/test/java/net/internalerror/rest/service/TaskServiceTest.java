@@ -14,7 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-public class TaskServiceTest extends ServiceTestBase {
+class TaskServiceTest extends ServiceTestBase {
 
     @Autowired
     private DataUtil dataUtil;

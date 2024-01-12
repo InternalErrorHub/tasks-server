@@ -8,7 +8,7 @@ import net.internalerror.test.ServiceTestBase;
 import org.junit.jupiter.api.RepeatedTest;
 import org.springframework.beans.factory.annotation.Autowired;
 
-public class UserServiceTest extends ServiceTestBase {
+class UserServiceTest extends ServiceTestBase {
 
     @Autowired
     private DataUtil dataUtil;

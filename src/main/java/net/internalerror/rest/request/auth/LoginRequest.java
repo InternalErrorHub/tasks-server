@@ -9,7 +9,7 @@ import net.internalerror.rest.request.RequestBase;
 
 @Getter
 @Setter
-public class LoginRequest extends RequestBase {
+public class LoginRequest implements RequestBase {
 
     @NotNull(message = Messages.EMAIL_IS_NULL)
     @NotEmpty(message = Messages.EMAIL_IS_EMPTY)

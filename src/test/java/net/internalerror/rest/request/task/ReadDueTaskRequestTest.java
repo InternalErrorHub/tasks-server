@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.function.BiConsumer;
 
-public class ReadDueTaskRequestTest extends SecuredRequestTestBase<ReadDueTaskRequest> {
+class ReadDueTaskRequestTest extends SecuredRequestTestBase<ReadDueTaskRequest> {
 
     @Override
     protected Class<ReadDueTaskRequest> getRequestClass() {

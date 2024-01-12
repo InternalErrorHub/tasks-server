@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.function.BiConsumer;
 
-public class CreateTaskRequestTest extends SecuredRequestTestBase<CreateTaskRequest> {
+class CreateTaskRequestTest extends SecuredRequestTestBase<CreateTaskRequest> {
 
     @Override
     protected Class<CreateTaskRequest> getRequestClass() {

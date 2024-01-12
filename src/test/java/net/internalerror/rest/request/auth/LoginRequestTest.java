@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.function.BiConsumer;
 
-public class LoginRequestTest extends RequestTestBase<LoginRequest> {
+class LoginRequestTest extends RequestTestBase<LoginRequest> {
 
     @Override
     protected Class<LoginRequest> getRequestClass() {
