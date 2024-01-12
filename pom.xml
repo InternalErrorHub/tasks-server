@@ -30,11 +30,14 @@
         <h2.version>2.2.224</h2.version>
         <jackson-datatype-jsr310.version>2.15.3</jackson-datatype-jsr310.version>
         <passay.version>1.6.4</passay.version>
+        <springdoc-openapi-starter-webmvc-ui.version>2.1.0</springdoc-openapi-starter-webmvc-ui.version>
 
         <!-- Plugins -->
         <spring-boot-maven-plugin.version>3.2.0</spring-boot-maven-plugin.version>
         <jacoco-maven-plugin.version>0.8.10</jacoco-maven-plugin.version>
         <maven-surefire-plugin.version>3.0.0</maven-surefire-plugin.version>
+        <springdoc-openapi-maven-plugin.version>1.4</springdoc-openapi-maven-plugin.version>
+        <openapi-generator-maven-plugin.version>6.6.0</openapi-generator-maven-plugin.version>
 
         <!-- Other -->
         <java.version>17</java.version>
@@ -101,6 +104,11 @@
             <artifactId>passay</artifactId>
             <version>${passay.version}</version>
         </dependency>
+        <dependency>
+            <groupId>org.springdoc</groupId>
+            <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
+            <version>${springdoc-openapi-starter-webmvc-ui.version}</version>
+        </dependency>
     </dependencies>
 
     <build>
@@ -119,6 +127,23 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <version>${spring-boot-maven-plugin.version}</version>
+                <configuration>
+                    <jvmArguments>-Dspring.application.admin.enabled=true</jvmArguments>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>pre-integration-test</id>
+                        <goals>
+                            <goal>start</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>post-integration-test</id>
+                        <goals>
+                            <goal>stop</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
             <plugin>
                 <groupId>org.jacoco</groupId>
@@ -136,6 +161,66 @@
                         <goals>
                             <goal>report</goal>
                         </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.springdoc</groupId>
+                <artifactId>springdoc-openapi-maven-plugin</artifactId>
+                <version>${springdoc-openapi-maven-plugin.version}</version>
+                <executions>
+                    <execution>
+                        <id>integration-test</id>
+                        <goals>
+                            <goal>generate</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.openapitools</groupId>
+                <artifactId>openapi-generator-maven-plugin</artifactId>
+                <version>${openapi-generator-maven-plugin.version}</version>
+                <executions>
+                    <execution>
+                        <phase>install</phase>
+                        <goals>
+                            <goal>generate</goal>
+                        </goals>
+                        <configuration>
+                            <generatorName>java</generatorName>
+                            <inputSpec>${project.build.directory}/openapi.json</inputSpec>
+                            <cleanupOutput>false</cleanupOutput>
+                            <output>${project.basedir}/tasks-rest-client</output>
+                            <gitHost>github.com</gitHost>
+                            <gitUserId>InternalErrorGit</gitUserId>
+                            <gitRepoId>tasks-rest-client</gitRepoId>
+                            <apiPackage>net.internalerror.api</apiPackage>
+                            <modelPackage>net.internalerror.model</modelPackage>
+                            <invokerPackage>net.internalerror.invoker</invokerPackage>
+                            <packageName>net.internalerror</packageName>
+                            <groupId>net.internalerror</groupId>
+                            <artifactId>tasks-rest-client</artifactId>
+                            <artifactVersion>${project.version}</artifactVersion>
+                            <generateApiTests>false</generateApiTests>
+                            <generateModelTests>false</generateModelTests>
+                            <addCompileSourceRoot>false</addCompileSourceRoot>
+                            <enablePostProcessFile>true</enablePostProcessFile>
+                            <configOptions>
+                                <artifactUrl>https://github.com/internalerrorgit/tasks-rest-client</artifactUrl>
+                                <artifactDescription>An API for the tasks-server generated by OpenAPI</artifactDescription>
+                                <scmConnection>scm:git:git@github.com:InternalErrorGit/tasks-rest-client.git</scmConnection>
+                                <scmDeveloperConnection>scm:git:git@github.com:InternalErrorGit/tasks-rest-client.git</scmDeveloperConnection>
+                                <scmUrl>https://github.com/InternalErrorGit/tasks-rest-client</scmUrl>
+                                <developerName>InternalErrorGit</developerName>
+                                <developerEmail>phil.gatzka@gmail.com</developerEmail>
+                                <developerOrganization>InternalErrorGit</developerOrganization>
+                                <developerOrganizationUrl>https://github.com/InternalErrorGit</developerOrganizationUrl>
+                                <licenseName>MIT</licenseName>
+                                <licenseUrl>https://opensource.org/license/mit/</licenseUrl>
+                                <booleanGetterPrefix>is</booleanGetterPrefix>
+                            </configOptions>
+                        </configuration>
                     </execution>
                 </executions>
             </plugin>
