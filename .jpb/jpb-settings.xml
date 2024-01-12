@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+    <component name="JpaPluginProjectSettings">
+        <option name="entityNameTemplate"/>
+        <option name="tableNameTemplate" value="table_${className.underscore().toLowerCase()}"/>
+        <option name="columnNameTemplate" value="column_${fieldName.underscore().toLowerCase()}"/>
+        <option name="isLombokAllArgsConstructor" value="true"/>
+        <option name="isLombokNoArgsConstructor" value="true"/>
+        <option name="scaffoldingLanguage"/>
+    </component>
+</project>
