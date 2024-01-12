@@ -39,4 +39,4 @@ jobs:
           destination-repository-name: 'tasks-rest-client'
           user-email: carles3@pina.cat
           commit-message: "v${{ env.RELEASE_VERSION }}"
-          target-branch: master
+          target-branch: main
