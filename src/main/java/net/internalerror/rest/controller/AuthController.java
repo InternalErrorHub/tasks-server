@@ -2,6 +2,7 @@ package net.internalerror.rest.controller;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import net.internalerror.ServerUtil;
 import net.internalerror.data.repository.UserRepository;
 import net.internalerror.rest.Messages;
 import net.internalerror.rest.definition.AuthControllerDefinition;
@@ -32,7 +33,7 @@ public class AuthController implements AuthControllerDefinition {
             throw new ValidationException(Messages.EMAIL_IS_UNAVAILABLE);
         }
 
-        //TODO: Validate password strength
+        ServerUtil.checkPasswordStrength(request.getPassword());
 
         return authService.register(request);
     }

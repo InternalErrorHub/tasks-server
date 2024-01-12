@@ -1,6 +1,7 @@
 package net.internalerror.rest.controller;
 
 import net.internalerror.rest.Messages;
+import net.internalerror.rest.exception.ValidationException;
 import net.internalerror.rest.request.auth.LoginRequest;
 import net.internalerror.rest.request.auth.RegisterRequest;
 import net.internalerror.test.ControllerTestBase;
@@ -16,6 +17,16 @@ class AuthControllerTest extends ControllerTestBase {
         registerRequest.setEmail("max.mustermann@gmail.com");
         registerRequest.setPassword("Passwd@123");
         assertDoesNotThrow(() -> this.getAuthController().register(registerRequest));
+    }
+
+    @RepeatedTest(TEST_RUNS)
+    void registerPASSWORD_IS_WEAK() {
+        RegisterRequest registerRequest = new RegisterRequest();
+        registerRequest.setFirstname("Max");
+        registerRequest.setLastname("Mustermann");
+        registerRequest.setEmail("max.mustermann@gmail.com");
+        registerRequest.setPassword("Pass123");
+        assertThrows(ValidationException.class, () -> this.getAuthController().register(registerRequest));
     }
 
     @RepeatedTest(TEST_RUNS)
