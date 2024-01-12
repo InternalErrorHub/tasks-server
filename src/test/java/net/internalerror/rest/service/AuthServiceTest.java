@@ -22,9 +22,9 @@ class AuthServiceTest extends ServiceTestBase {
         registerRequest.setEmail("max.mustermann@gmail.com");
         registerRequest.setPassword("Passwd@123");
 
-        RegisterResponse registerResponse = getAuthService().register(registerRequest);
+        RegisterResponse registerResponse = authService.register(registerRequest);
         assertNotNull(registerResponse);
-        assertTrue(getUserRepository().existsByEmail(registerResponse.email()));
+        assertTrue(userRepository.existsByEmail(registerResponse.email()));
     }
 
     @RepeatedTest(TEST_RUNS)
@@ -35,17 +35,17 @@ class AuthServiceTest extends ServiceTestBase {
         registerRequest.setEmail("max.mustermann@gmail.com");
         registerRequest.setPassword("Passwd@123");
 
-        getAuthService().register(registerRequest);
+        authService.register(registerRequest);
 
         LoginRequest loginRequest = new LoginRequest();
         loginRequest.setEmail("max.mustermann@gmail.com");
         loginRequest.setPassword("Passwd@123");
 
-        LoginResponse loginResponse = getAuthService().login(loginRequest);
+        LoginResponse loginResponse = authService.login(loginRequest);
         assertNotNull(loginResponse);
-        assertTrue(getSecurityTokenRepository().existsByToken(loginResponse.token()));
-        SecurityToken securityToken = getSecurityTokenRepository().findByToken(loginResponse.token());
-        User user = getUserRepository().findByEmail(loginRequest.getEmail());
+        assertTrue(securityTokenRepository.existsByToken(loginResponse.token()));
+        SecurityToken securityToken = securityTokenRepository.findByToken(loginResponse.token());
+        User user = userRepository.findByEmail(loginRequest.getEmail());
         assertEquals(user.getEmail(), securityToken.getUser().getEmail());
     }
 
@@ -58,14 +58,14 @@ class AuthServiceTest extends ServiceTestBase {
         registerRequest.setEmail("max.mustermann@gmail.com");
         registerRequest.setPassword("Passwd@123");
 
-        getAuthService().register(registerRequest);
+        authService.register(registerRequest);
 
         LoginRequest loginRequest = new LoginRequest();
         loginRequest.setEmail("max.mustermann@gmail.com");
         loginRequest.setPassword("Passwd@123");
 
-        LoginResponse loginResponse1 = getAuthService().login(loginRequest);
-        LoginResponse loginResponse2 = getAuthService().login(loginRequest);
+        LoginResponse loginResponse1 = authService.login(loginRequest);
+        LoginResponse loginResponse2 = authService.login(loginRequest);
         assertEquals(loginResponse1.token(), loginResponse2.token());
     }
 
@@ -78,19 +78,19 @@ class AuthServiceTest extends ServiceTestBase {
         registerRequest.setEmail("max.mustermann@gmail.com");
         registerRequest.setPassword("Passwd@123");
 
-        getAuthService().register(registerRequest);
+        authService.register(registerRequest);
 
         LoginRequest loginRequest = new LoginRequest();
         loginRequest.setEmail("max.mustermann@gmail.com");
         loginRequest.setPassword("Passwd@123");
 
-        LoginResponse loginResponse1 = getAuthService().login(loginRequest);
+        LoginResponse loginResponse1 = authService.login(loginRequest);
 
-        SecurityToken securityToken = getSecurityTokenRepository().findByToken(loginResponse1.token());
+        SecurityToken securityToken = securityTokenRepository.findByToken(loginResponse1.token());
         securityToken.setValidUntil(Instant.now().minus(10, ChronoUnit.DAYS));
-        getSecurityTokenRepository().save(securityToken);
+        securityTokenRepository.save(securityToken);
 
-        LoginResponse loginResponse2 = getAuthService().login(loginRequest);
+        LoginResponse loginResponse2 = authService.login(loginRequest);
         assertNotEquals(loginResponse1.token(), loginResponse2.token());
     }
 

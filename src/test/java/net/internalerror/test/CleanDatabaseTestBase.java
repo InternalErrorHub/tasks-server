@@ -1,7 +1,5 @@
 package net.internalerror.test;
 
-import lombok.AccessLevel;
-import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 import net.internalerror.data.repository.SecurityTokenRepository;
 import net.internalerror.data.repository.TaskRepository;
@@ -10,20 +8,19 @@ import org.junit.jupiter.api.BeforeEach;
 import org.springframework.beans.factory.annotation.Autowired;
 
 @Slf4j
-@Getter(AccessLevel.PROTECTED)
 public abstract class CleanDatabaseTestBase extends TestBase {
 
     @Autowired
-    private DataUtil dataUtil;
+    protected DataUtil dataUtil;
 
     @Autowired
-    private UserRepository userRepository;
+    protected UserRepository userRepository;
 
     @Autowired
-    private SecurityTokenRepository securityTokenRepository;
+    protected SecurityTokenRepository securityTokenRepository;
 
     @Autowired
-    private TaskRepository taskRepository;
+    protected TaskRepository taskRepository;
 
     @BeforeEach
     public void cleanDatabase() {

@@ -29,7 +29,7 @@ class TaskServiceTest extends ServiceTestBase {
         createTaskRequest.setDue(Instant.now());
         createTaskRequest.setToken(credentials.token());
 
-        CreateTaskResponse createTaskResponse = getTaskService().create(createTaskRequest);
+        CreateTaskResponse createTaskResponse = taskService.create(createTaskRequest);
         assertNotNull(createTaskResponse);
         assertEquals(createTaskRequest.getName(), createTaskResponse.name());
         assertEqualsInstant(createTaskRequest.getDue(), createTaskResponse.due());
@@ -44,7 +44,7 @@ class TaskServiceTest extends ServiceTestBase {
         readTaskRequest.setName(testTask.name());
         readTaskRequest.setToken(credentials.token());
 
-        ReadTaskResponse readTaskResponse = getTaskService().read(readTaskRequest);
+        ReadTaskResponse readTaskResponse = taskService.read(readTaskRequest);
         assertNotNull(readTaskResponse);
         assertEquals(testTask.name(), readTaskResponse.name());
         assertEquals(testTask.details(), readTaskResponse.details());
@@ -62,7 +62,7 @@ class TaskServiceTest extends ServiceTestBase {
         ReadAllTaskRequest readAllTaskRequest = new ReadAllTaskRequest();
         readAllTaskRequest.setToken(credentials.token());
 
-        ReadAllTaskResponse readAllTaskResponse = getTaskService().readAll(readAllTaskRequest);
+        ReadAllTaskResponse readAllTaskResponse = taskService.readAll(readAllTaskRequest);
 
         for (DataUtil.TestTask testTask : testTaskList) {
             boolean present = readAllTaskResponse.list().stream().anyMatch(taskInfo -> Objects.equals(testTask.name(), taskInfo.name()) && testTask.due().getEpochSecond() == taskInfo.due().getEpochSecond());
@@ -85,7 +85,7 @@ class TaskServiceTest extends ServiceTestBase {
         readDueTaskRequest.setToken(credentials.token());
         readDueTaskRequest.setDueInfo(new ReadDueTaskRequest.DueInfo(ChronoUnit.DAYS, 5));
 
-        ReadDueTaskResponse readDueTaskResponse = getTaskService().readDue(readDueTaskRequest);
+        ReadDueTaskResponse readDueTaskResponse = taskService.readDue(readDueTaskRequest);
 
         assertEquals(25, readDueTaskResponse.list().size());
         for (ReadAllTaskResponse.TaskInfo taskInfo : readDueTaskResponse.list()) {
@@ -105,7 +105,7 @@ class TaskServiceTest extends ServiceTestBase {
         updateTaskRequest.setDue(Instant.now());
         updateTaskRequest.setToken(credentials.token());
 
-        UpdateTaskResponse updateTaskResponse = getTaskService().update(updateTaskRequest);
+        UpdateTaskResponse updateTaskResponse = taskService.update(updateTaskRequest);
         assertNotNull(updateTaskResponse);
         assertEquals(updateTaskResponse.due(), updateTaskRequest.getDue());
         assertEquals(updateTaskResponse.name(), updateTaskRequest.getNewName());
@@ -122,12 +122,12 @@ class TaskServiceTest extends ServiceTestBase {
         deleteTaskRequest.setName(testTask.name());
         deleteTaskRequest.setToken(credentials.token());
 
-        DeleteTaskResponse deleteTaskResponse = getTaskService().delete(deleteTaskRequest);
+        DeleteTaskResponse deleteTaskResponse = taskService.delete(deleteTaskRequest);
         assertNotNull(deleteTaskResponse);
         assertEquals(deleteTaskRequest.getName(), deleteTaskResponse.name());
 
-        User user = getUserRepository().findByEmail(credentials.email());
-        assertFalse(getTaskRepository().existsByUserAndNameIgnoreCase(user, deleteTaskRequest.getName()));
+        User user = userRepository.findByEmail(credentials.email());
+        assertFalse(taskRepository.existsByUserAndNameIgnoreCase(user, deleteTaskRequest.getName()));
 
     }
 

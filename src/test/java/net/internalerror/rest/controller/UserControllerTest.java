@@ -14,13 +14,13 @@ class UserControllerTest extends ControllerTestBase {
 
     @RepeatedTest(TEST_RUNS)
     void update() {
-        DataUtil.TestCredentials testCredentials = getDataUtil().createTestCredentials();
+        DataUtil.TestCredentials testCredentials = dataUtil.createTestCredentials();
 
         UpdateUserRequest updateUserRequest = new UpdateUserRequest();
         updateUserRequest.setFirstname("Max");
         updateUserRequest.setLastname("Mustermann");
         updateUserRequest.setToken(testCredentials.token());
-        assertDoesNotThrow(() -> getUserController().update(updateUserRequest));
+        assertDoesNotThrow(() -> userController.update(updateUserRequest));
     }
 
     @RepeatedTest(TEST_RUNS)
@@ -29,7 +29,7 @@ class UserControllerTest extends ControllerTestBase {
         updateUserRequest.setFirstname("Max");
         updateUserRequest.setLastname("Mustermann");
         updateUserRequest.setToken("");
-        assertThrowsValidationException(Messages.UNAUTHORIZED_REQUEST, () -> getUserController().update(updateUserRequest));
+        assertThrowsValidationException(Messages.UNAUTHORIZED_REQUEST, () -> userController.update(updateUserRequest));
     }
 
     @RepeatedTest(TEST_RUNS)
@@ -38,22 +38,22 @@ class UserControllerTest extends ControllerTestBase {
         updateUserRequest.setFirstname("Max");
         updateUserRequest.setLastname("Mustermann");
         updateUserRequest.setToken("ABC");
-        assertThrowsValidationException(Messages.UNAUTHORIZED_REQUEST, () -> getUserController().update(updateUserRequest));
+        assertThrowsValidationException(Messages.UNAUTHORIZED_REQUEST, () -> userController.update(updateUserRequest));
     }
 
     @RepeatedTest(TEST_RUNS)
     void updateUNAUTHORIZED_REQUEST3() {
-        DataUtil.TestCredentials testCredentials = getDataUtil().createTestCredentials();
+        DataUtil.TestCredentials testCredentials = dataUtil.createTestCredentials();
 
-        SecurityToken securityToken = getSecurityTokenRepository().findByToken(testCredentials.token());
+        SecurityToken securityToken = securityTokenRepository.findByToken(testCredentials.token());
         securityToken.setValidUntil(Instant.now().minus(10, ChronoUnit.DAYS));
-        getSecurityTokenRepository().save(securityToken);
+        securityTokenRepository.save(securityToken);
 
         UpdateUserRequest updateUserRequest = new UpdateUserRequest();
         updateUserRequest.setFirstname("Max");
         updateUserRequest.setLastname("Mustermann");
         updateUserRequest.setToken(securityToken.getToken());
-        assertThrowsValidationException(Messages.UNAUTHORIZED_REQUEST, () -> getUserController().update(updateUserRequest));
+        assertThrowsValidationException(Messages.UNAUTHORIZED_REQUEST, () -> userController.update(updateUserRequest));
     }
 
 }

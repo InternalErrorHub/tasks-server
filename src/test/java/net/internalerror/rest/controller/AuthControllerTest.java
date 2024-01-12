@@ -16,7 +16,7 @@ class AuthControllerTest extends ControllerTestBase {
         registerRequest.setLastname("Mustermann");
         registerRequest.setEmail("max.mustermann@gmail.com");
         registerRequest.setPassword("Passwd@123");
-        assertDoesNotThrow(() -> this.getAuthController().register(registerRequest));
+        assertDoesNotThrow(() -> authController.register(registerRequest));
     }
 
     @RepeatedTest(TEST_RUNS)
@@ -26,7 +26,7 @@ class AuthControllerTest extends ControllerTestBase {
         registerRequest.setLastname("Mustermann");
         registerRequest.setEmail("max.mustermann@gmail.com");
         registerRequest.setPassword("Pass123");
-        assertThrows(ValidationException.class, () -> this.getAuthController().register(registerRequest));
+        assertThrows(ValidationException.class, () -> authController.register(registerRequest));
     }
 
     @RepeatedTest(TEST_RUNS)
@@ -36,8 +36,8 @@ class AuthControllerTest extends ControllerTestBase {
         registerRequest.setLastname("Mustermann");
         registerRequest.setEmail("max.mustermann@gmail.com");
         registerRequest.setPassword("Passwd@123");
-        assertDoesNotThrow(() -> this.getAuthController().register(registerRequest));
-        assertThrowsValidationException(Messages.EMAIL_IS_UNAVAILABLE, () -> this.getAuthController().register(registerRequest));
+        assertDoesNotThrow(() -> authController.register(registerRequest));
+        assertThrowsValidationException(Messages.EMAIL_IS_UNAVAILABLE, () -> authController.register(registerRequest));
     }
 
     @RepeatedTest(TEST_RUNS)
@@ -47,12 +47,12 @@ class AuthControllerTest extends ControllerTestBase {
         registerRequest.setLastname("Mustermann");
         registerRequest.setEmail("max.mustermann@gmail.com");
         registerRequest.setPassword("Passwd@123");
-        assertDoesNotThrow(() -> this.getAuthController().register(registerRequest));
+        assertDoesNotThrow(() -> authController.register(registerRequest));
 
         LoginRequest loginRequest = new LoginRequest();
         loginRequest.setEmail("max.mustermann@gmail.com");
         loginRequest.setPassword("Passwd@123");
-        assertDoesNotThrow(() -> this.getAuthController().login(loginRequest));
+        assertDoesNotThrow(() -> authController.login(loginRequest));
     }
 
     @RepeatedTest(TEST_RUNS)
@@ -60,7 +60,7 @@ class AuthControllerTest extends ControllerTestBase {
         LoginRequest loginRequest = new LoginRequest();
         loginRequest.setEmail("max.mustermann@gmail.com");
         loginRequest.setPassword("Passwd@123");
-        assertThrowsValidationException(Messages.EMAIL_IS_UNREGISTERED, () -> this.getAuthController().login(loginRequest));
+        assertThrowsValidationException(Messages.EMAIL_IS_UNREGISTERED, () -> authController.login(loginRequest));
     }
 
     @RepeatedTest(TEST_RUNS)
@@ -70,12 +70,12 @@ class AuthControllerTest extends ControllerTestBase {
         registerRequest.setLastname("Mustermann");
         registerRequest.setEmail("max.mustermann@gmail.com");
         registerRequest.setPassword("Passwd@123");
-        assertDoesNotThrow(() -> this.getAuthController().register(registerRequest));
+        assertDoesNotThrow(() -> authController.register(registerRequest));
 
         LoginRequest loginRequest = new LoginRequest();
         loginRequest.setEmail("max.mustermann@gmail.com");
         loginRequest.setPassword("Passwd@1234");
-        assertThrowsValidationException(Messages.INVALID_CREDENTIALS, () -> this.getAuthController().login(loginRequest));
+        assertThrowsValidationException(Messages.INVALID_CREDENTIALS, () -> authController.login(loginRequest));
     }
 
 }

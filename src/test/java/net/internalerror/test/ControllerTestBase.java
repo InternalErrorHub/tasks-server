@@ -1,7 +1,5 @@
 package net.internalerror.test;
 
-import lombok.AccessLevel;
-import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 import net.internalerror.rest.controller.AuthController;
 import net.internalerror.rest.controller.TaskController;
@@ -11,17 +9,16 @@ import org.junit.jupiter.api.function.Executable;
 import org.springframework.beans.factory.annotation.Autowired;
 
 @Slf4j
-@Getter(AccessLevel.PROTECTED)
 public abstract class ControllerTestBase extends CleanDatabaseTestBase {
 
     @Autowired
-    private AuthController authController;
+    protected AuthController authController;
 
     @Autowired
-    private UserController userController;
+    protected UserController userController;
 
     @Autowired
-    private TaskController taskController;
+    protected TaskController taskController;
 
     protected static void assertThrowsValidationException(String message, Executable executable) {
         ValidationException exception = assertThrows(ValidationException.class, executable);
