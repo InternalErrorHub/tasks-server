@@ -1,6 +1,7 @@
 package net.internalerror.rest.controller;
 
 import net.internalerror.data.entity.SecurityToken;
+import net.internalerror.rest.Messages;
 import net.internalerror.rest.request.user.UpdateUserRequest;
 import net.internalerror.test.ControllerTestBase;
 import net.internalerror.test.DataUtil;
@@ -28,7 +29,7 @@ class UserControllerTest extends ControllerTestBase {
         updateUserRequest.setFirstname("Max");
         updateUserRequest.setLastname("Mustermann");
         updateUserRequest.setToken("");
-        assertDoesNotThrow(() -> getUserController().update(updateUserRequest));
+        assertThrowsValidationException(Messages.UNAUTHORIZED_REQUEST, () -> getUserController().update(updateUserRequest));
     }
 
     @RepeatedTest(TEST_RUNS)
@@ -37,7 +38,7 @@ class UserControllerTest extends ControllerTestBase {
         updateUserRequest.setFirstname("Max");
         updateUserRequest.setLastname("Mustermann");
         updateUserRequest.setToken("ABC");
-        assertDoesNotThrow(() -> getUserController().update(updateUserRequest));
+        assertThrowsValidationException(Messages.UNAUTHORIZED_REQUEST, () -> getUserController().update(updateUserRequest));
     }
 
     @RepeatedTest(TEST_RUNS)
@@ -52,7 +53,7 @@ class UserControllerTest extends ControllerTestBase {
         updateUserRequest.setFirstname("Max");
         updateUserRequest.setLastname("Mustermann");
         updateUserRequest.setToken(securityToken.getToken());
-        assertDoesNotThrow(() -> getUserController().update(updateUserRequest));
+        assertThrowsValidationException(Messages.UNAUTHORIZED_REQUEST, () -> getUserController().update(updateUserRequest));
     }
 
 }
