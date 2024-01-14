@@ -16,6 +16,8 @@
     <name>${project.artifactId}</name>
     <url>https://github.com/InternalErrorHub/tasks-server</url>
 
+    <description>Empty</description>
+
     <scm>
         <developerConnection>scm:git:git@github.com:InternalErrorHub/tasks-server.git</developerConnection>
         <connection>scm:git:git@github.com:InternalErrorHub/tasks-server.git</connection>
