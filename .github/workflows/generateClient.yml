@@ -23,7 +23,7 @@ jobs:
       - name: Checkout current client
         uses: actions/checkout@v4
         with:
-          repository: InternalErrorGit/tasks-rest-client
+          repository: InternalErrorHub/tasks-rest-client
           path: tasks-rest-client
       - name: Generate new Client
         run: mvn --batch-mode install
@@ -35,7 +35,7 @@ jobs:
           SSH_DEPLOY_KEY: ${{ secrets.CLIENT_DEPLOY_KEY }}
         with:
           source-directory: 'tasks-rest-client'
-          destination-github-username: 'InternalErrorGit'
+          destination-github-username: 'InternalErrorHub'
           destination-repository-name: 'tasks-rest-client'
           user-email: carles3@pina.cat
           commit-message: "v${{ env.RELEASE_VERSION }}"
