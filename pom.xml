@@ -41,7 +41,7 @@
 
         <!-- Other -->
         <java.version>17</java.version>
-        <sonar.organization>InternalErrorHub</sonar.organization>
+        <sonar.organization>internalerrorgit</sonar.organization>
         <sonar.host.url>https://sonarcloud.io</sonar.host.url>
     </properties>
 
