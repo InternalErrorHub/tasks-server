@@ -1,4 +1,4 @@
-name: Build and Publish
+name: Build and publish
 
 on:
   push:
@@ -22,9 +22,9 @@ jobs:
       - name: Setup Maven Settings
         uses: s4u/maven-settings-action@v2
         with:
-          servers: '[{"id": "github", "username": "philipp.gatzka@swissperform.ch", "password": "${{ secrets.PACKAGES_TOKEN }}"}]'
+          servers: '[{"id": "github", "username": "internalerrorgitci@swissperform.ch", "password": "${{ secrets.CI_ACCESS_TOKEN }}"}]'
           githubServer: false
       - name: Publish to GitHub Packages
         run: mvn deploy
         env:
-          GITHUB_TOKEN: ${{ secrets.PACKAGES_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.CI_ACCESS_TOKEN }}

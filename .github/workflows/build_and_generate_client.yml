@@ -1,4 +1,4 @@
-name: Generate Client
+name: Build and generate client
 
 on:
   push:
