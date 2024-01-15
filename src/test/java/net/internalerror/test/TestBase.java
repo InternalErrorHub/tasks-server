@@ -7,6 +7,7 @@ import org.junit.jupiter.api.TestInfo;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.time.Instant;
+import org.springframework.boot.test.context.TestConfiguration;
 
 @Slf4j
 @SpringBootTest
@@ -25,5 +26,7 @@ public abstract class TestBase extends Assertions {
 
         log.debug("Running test: {}::{}", clazz, method);
     }
+
+
 
 }
