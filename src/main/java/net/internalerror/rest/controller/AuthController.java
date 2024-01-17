@@ -20,36 +20,36 @@ import org.springframework.web.bind.annotation.RestController;
 @AllArgsConstructor
 public class AuthController implements AuthControllerDefinition {
 
-    private final AuthService authService;
+  private final AuthService authService;
 
-    private final UserRepository userRepository;
+  private final UserRepository userRepository;
 
-    private final SecurityService securityService;
+  private final SecurityService securityService;
 
-    @Override
-    public RegisterResponse register(RegisterRequest request) {
+  @Override
+  public RegisterResponse register(RegisterRequest request) {
 
-        if (userRepository.existsByEmail(request.getEmail())) {
-            throw new ValidationException(Messages.EMAIL_IS_UNAVAILABLE);
-        }
-
-        ServerUtil.checkPasswordStrength(request.getPassword());
-
-        return authService.register(request);
+    if (userRepository.existsByEmail(request.getEmail())) {
+      throw new ValidationException(Messages.EMAIL_IS_UNAVAILABLE);
     }
 
-    @Override
-    public LoginResponse login(LoginRequest request) {
+    ServerUtil.checkPasswordStrength(request.getPassword());
 
-        if (!userRepository.existsByEmail(request.getEmail())) {
-            throw new ValidationException(Messages.EMAIL_IS_UNREGISTERED);
-        }
+    return authService.register(request);
+  }
 
-        if (!securityService.passwordMatches(request.getEmail(), request.getPassword())) {
-            throw new ValidationException(Messages.INVALID_CREDENTIALS);
-        }
+  @Override
+  public LoginResponse login(LoginRequest request) {
 
-        return authService.login(request);
+    if (!userRepository.existsByEmail(request.getEmail())) {
+      throw new ValidationException(Messages.EMAIL_IS_UNREGISTERED);
     }
+
+    if (!securityService.passwordMatches(request.getEmail(), request.getPassword())) {
+      throw new ValidationException(Messages.INVALID_CREDENTIALS);
+    }
+
+    return authService.login(request);
+  }
 
 }

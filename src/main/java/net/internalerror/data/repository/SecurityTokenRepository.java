@@ -10,12 +10,12 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface SecurityTokenRepository extends EntityBaseRepository<SecurityToken> {
 
-    boolean existsByToken(String token);
+  boolean existsByToken(String token);
 
-    SecurityToken findByUser(User user);
+  SecurityToken findByUser(User user);
 
-    boolean existsByUser(User user);
+  boolean existsByUser(User user);
 
-    SecurityToken findByToken(String token);
+  SecurityToken findByToken(String token);
 
 }

@@ -1,0 +1,25 @@
+package net.internalerror.logging;
+
+import jakarta.servlet.Filter;
+import jakarta.servlet.FilterChain;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.ServletRequest;
+import jakarta.servlet.ServletResponse;
+import jakarta.servlet.http.HttpServletRequest;
+import java.io.IOException;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Component;
+
+@Slf4j
+@Component
+public class LoggingFilter implements Filter {
+
+  @Override
+  public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws ServletException, IOException {
+    HttpServletRequest request = (HttpServletRequest) servletRequest;
+    log.info("Logging request: {} {}", request.getRequestURI(), request.getMethod());
+    filterChain.doFilter(servletRequest, servletResponse);
+    log.info("Logging response: {}", servletResponse.getContentType());
+  }
+
+}

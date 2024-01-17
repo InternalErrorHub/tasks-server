@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 public interface UserControllerDefinition {
 
-    @PostMapping(name = "Update user", value = Routes.USER_UPDATE, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    UpdateUserResponse update(@RequestBody @Valid UpdateUserRequest request);
+  @PostMapping(name = "Update user", value = Routes.USER_UPDATE, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+  UpdateUserResponse update(@RequestBody @Valid UpdateUserRequest request);
 
 }

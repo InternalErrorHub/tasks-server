@@ -12,10 +12,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 public interface AuthControllerDefinition {
 
-    @PostMapping(name = "Register", value = Routes.AUTH_REGISTER, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    RegisterResponse register(@RequestBody @Valid RegisterRequest request);
+  @PostMapping(name = "Register", value = Routes.AUTH_REGISTER, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+  RegisterResponse register(@RequestBody @Valid RegisterRequest request);
 
-    @PostMapping(name = "Login", value = Routes.AUTH_LOGIN, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    LoginResponse login(@RequestBody @Valid LoginRequest request);
+  @PostMapping(name = "Login", value = Routes.AUTH_LOGIN, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+  LoginResponse login(@RequestBody @Valid LoginRequest request);
 
 }

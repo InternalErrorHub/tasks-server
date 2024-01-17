@@ -9,8 +9,8 @@ import lombok.Setter;
 @Setter
 public abstract class SecuredRequestBase implements RequestBase {
 
-    @NotNull(message = "TOKEN_IS_NULL")
-    @NotEmpty(message = "TOKEN_IS_EMPTY")
-    private String token;
+  @NotNull(message = "TOKEN_IS_NULL")
+  @NotEmpty(message = "TOKEN_IS_EMPTY")
+  private String token;
 
 }

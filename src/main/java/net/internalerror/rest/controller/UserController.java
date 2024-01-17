@@ -14,14 +14,14 @@ import org.springframework.web.bind.annotation.RestController;
 @AllArgsConstructor
 public class UserController implements UserControllerDefinition {
 
-    private final UserService userService;
+  private final UserService userService;
 
-    private final SecurityService securityService;
+  private final SecurityService securityService;
 
-    @Override
-    public UpdateUserResponse update(UpdateUserRequest request) {
-        securityService.checkToken(request);
-        return userService.update(request);
-    }
+  @Override
+  public UpdateUserResponse update(UpdateUserRequest request) {
+    securityService.checkToken(request);
+    return userService.update(request);
+  }
 
 }

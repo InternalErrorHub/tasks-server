@@ -11,8 +11,8 @@ import net.internalerror.rest.request.SecuredRequestBase;
 @Setter
 public class DeleteTaskRequest extends SecuredRequestBase {
 
-    @NotNull(message = Messages.NAME_IS_NULL)
-    @NotEmpty(message = Messages.NAME_IS_EMPTY)
-    private String name;
+  @NotNull(message = Messages.NAME_IS_NULL)
+  @NotEmpty(message = Messages.NAME_IS_EMPTY)
+  private String name;
 
 }

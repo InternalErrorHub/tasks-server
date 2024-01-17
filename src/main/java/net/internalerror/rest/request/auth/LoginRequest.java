@@ -11,12 +11,12 @@ import net.internalerror.rest.request.RequestBase;
 @Setter
 public class LoginRequest implements RequestBase {
 
-    @NotNull(message = Messages.EMAIL_IS_NULL)
-    @NotEmpty(message = Messages.EMAIL_IS_EMPTY)
-    private String email;
+  @NotNull(message = Messages.EMAIL_IS_NULL)
+  @NotEmpty(message = Messages.EMAIL_IS_EMPTY)
+  private String email;
 
-    @NotNull(message = Messages.PASSWORD_IS_NULL)
-    @NotEmpty(message = Messages.PASSWORD_IS_EMPTY)
-    private String password;
+  @NotNull(message = Messages.PASSWORD_IS_NULL)
+  @NotEmpty(message = Messages.PASSWORD_IS_EMPTY)
+  private String password;
 
 }

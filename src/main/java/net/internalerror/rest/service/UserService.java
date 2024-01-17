@@ -13,20 +13,20 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class UserService implements UserControllerDefinition {
 
-    private final SecurityService securityService;
+  private final SecurityService securityService;
 
-    private final UserRepository userRepository;
+  private final UserRepository userRepository;
 
-    @Override
-    public UpdateUserResponse update(UpdateUserRequest request) {
-        User user = securityService.getUser(request);
+  @Override
+  public UpdateUserResponse update(UpdateUserRequest request) {
+    User user = securityService.getUser(request);
 
-        user.setFirstname(request.getFirstname());
-        user.setLastname(request.getLastname());
+    user.setFirstname(request.getFirstname());
+    user.setLastname(request.getLastname());
 
-        userRepository.save(user);
+    userRepository.save(user);
 
-        return new UpdateUserResponse(user.getFirstname(), user.getLastname());
-    }
+    return new UpdateUserResponse(user.getFirstname(), user.getLastname());
+  }
 
 }

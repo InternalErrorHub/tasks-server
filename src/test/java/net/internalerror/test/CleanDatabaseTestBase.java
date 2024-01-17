@@ -10,24 +10,24 @@ import org.springframework.beans.factory.annotation.Autowired;
 @Slf4j
 public abstract class CleanDatabaseTestBase extends TestBase {
 
-    @Autowired
-    protected DataUtil dataUtil;
+  @Autowired
+  protected DataUtil dataUtil;
 
-    @Autowired
-    protected UserRepository userRepository;
+  @Autowired
+  protected UserRepository userRepository;
 
-    @Autowired
-    protected SecurityTokenRepository securityTokenRepository;
+  @Autowired
+  protected SecurityTokenRepository securityTokenRepository;
 
-    @Autowired
-    protected TaskRepository taskRepository;
+  @Autowired
+  protected TaskRepository taskRepository;
 
-    @BeforeEach
-    public void cleanDatabase() {
-        log.debug("Cleaning Database for new Test execution");
-        taskRepository.deleteAll();
-        securityTokenRepository.deleteAll();
-        userRepository.deleteAll();
-    }
+  @BeforeEach
+  public void cleanDatabase() {
+    log.debug("Cleaning Database for new Test execution");
+    taskRepository.deleteAll();
+    securityTokenRepository.deleteAll();
+    userRepository.deleteAll();
+  }
 
 }

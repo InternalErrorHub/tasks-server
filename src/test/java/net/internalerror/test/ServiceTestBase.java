@@ -7,13 +7,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 public abstract class ServiceTestBase extends CleanDatabaseTestBase {
 
-    @Autowired
-    protected AuthService authService;
+  @Autowired
+  protected AuthService authService;
 
-    @Autowired
-    protected UserService userService;
+  @Autowired
+  protected UserService userService;
 
-    @Autowired
-    protected TaskService taskService;
+  @Autowired
+  protected TaskService taskService;
 
 }

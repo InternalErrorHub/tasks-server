@@ -16,30 +16,30 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class AuthService implements AuthControllerDefinition {
 
-    private final SecurityService securityService;
+  private final SecurityService securityService;
 
-    private final UserRepository userRepository;
+  private final UserRepository userRepository;
 
-    @Override
-    public RegisterResponse register(RegisterRequest request) {
+  @Override
+  public RegisterResponse register(RegisterRequest request) {
 
-        User user = new User();
-        user.setFirstname(request.getFirstname());
-        user.setLastname(request.getLastname());
-        user.setEmail(request.getEmail());
-        user.setPassword(securityService.encodePassword(request.getPassword()));
+    User user = new User();
+    user.setFirstname(request.getFirstname());
+    user.setLastname(request.getLastname());
+    user.setEmail(request.getEmail());
+    user.setPassword(securityService.encodePassword(request.getPassword()));
 
-        userRepository.save(user);
+    userRepository.save(user);
 
-        return new RegisterResponse(user.getEmail());
-    }
+    return new RegisterResponse(user.getEmail());
+  }
 
-    @Override
-    public LoginResponse login(LoginRequest request) {
-        User user = userRepository.findByEmail(request.getEmail());
-        SecurityToken securityToken = securityService.getSecurityToken(user);
+  @Override
+  public LoginResponse login(LoginRequest request) {
+    User user = userRepository.findByEmail(request.getEmail());
+    SecurityToken securityToken = securityService.getSecurityToken(user);
 
-        return new LoginResponse(securityToken.getToken());
-    }
+    return new LoginResponse(securityToken.getToken());
+  }
 
 }

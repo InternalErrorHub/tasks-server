@@ -11,19 +11,19 @@ import org.springframework.beans.factory.annotation.Autowired;
 @Slf4j
 public abstract class ControllerTestBase extends CleanDatabaseTestBase {
 
-    @Autowired
-    protected AuthController authController;
+  @Autowired
+  protected AuthController authController;
 
-    @Autowired
-    protected UserController userController;
+  @Autowired
+  protected UserController userController;
 
-    @Autowired
-    protected TaskController taskController;
+  @Autowired
+  protected TaskController taskController;
 
-    protected static void assertThrowsValidationException(String message, Executable executable) {
-        ValidationException exception = assertThrows(ValidationException.class, executable);
-        log.debug("Expected exception was thrown: {}", exception.getMessage(), exception);
-        assertEquals(message, exception.getMessage());
-    }
+  protected static void assertThrowsValidationException(String message, Executable executable) {
+    ValidationException exception = assertThrows(ValidationException.class, executable);
+    log.debug("Expected exception was thrown: {}", exception.getMessage(), exception);
+    assertEquals(message, exception.getMessage());
+  }
 
 }
