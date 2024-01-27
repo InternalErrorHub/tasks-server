@@ -1,1 +1,1 @@
-web: java $java_opts -jar target/tasks-server*.jar --port $PORT
+web: java $java_opts -Dserver.port=$PORT -jar target/tasks-server*.jar
