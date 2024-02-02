@@ -23,6 +23,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilder;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -57,7 +58,7 @@ public abstract class RequestTestBase<R extends RequestBase> extends TestBase {
         String json = objectMapper.writeValueAsString(requestTest.request);
         log.debug("Sending request: {}, expecting: {}", json, requestTest.expectedMessage);
 
-        DynamicTest test = DynamicTest.dynamicTest(String.format("repetition %s of %s: %s", i, TEST_RUNS, requestTest.expectedMessage), () -> mockMvc.perform(requestBuilder.content(json).contentType(MediaType.APPLICATION_JSON_VALUE)).andExpect(status().isBadRequest()).andExpect(content().string(new StringContains(requestTest.expectedMessage))));
+        DynamicTest test = DynamicTest.dynamicTest(String.format("repetition %s of %s: %s", i, TEST_RUNS, requestTest.expectedMessage), () -> mockMvc.perform(requestBuilder.content(json).contentType(MediaType.APPLICATION_JSON_VALUE)).andExpect(status().isBadRequest()).andDo(print()).andExpect(content().string(new StringContains(requestTest.expectedMessage))));
         tests.add(test);
       }
     }
