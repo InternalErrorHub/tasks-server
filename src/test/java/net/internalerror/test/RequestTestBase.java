@@ -52,17 +52,18 @@ public abstract class RequestTestBase<R extends RequestBase> extends TestBase {
     List<DynamicTest> tests = new ArrayList<>();
     List<RequestTest> requestTests = getRequestTests();
     MockHttpServletRequestBuilder requestBuilder = post("http://localhost:8080/" + getRoute());
-
     for (int i = 1; i < TEST_RUNS + 1; i++) {
       for (RequestTest requestTest : requestTests) {
         String json = objectMapper.writeValueAsString(requestTest.request);
         log.debug("Sending request: {}, expecting: {}", json, requestTest.expectedMessage);
-
-        DynamicTest test = DynamicTest.dynamicTest(String.format("repetition %s of %s: %s", i, TEST_RUNS, requestTest.expectedMessage), () -> mockMvc.perform(requestBuilder.content(json).contentType(MediaType.APPLICATION_JSON_VALUE)).andExpect(status().isBadRequest()).andDo(print()).andExpect(content().string(new StringContains(requestTest.expectedMessage))));
+        DynamicTest test = DynamicTest.dynamicTest(String.format("repetition %s of %s: %s", i, TEST_RUNS, requestTest.expectedMessage), () -> mockMvc.perform(requestBuilder.content(json)
+                                                                                                                                                                            .contentType(MediaType.APPLICATION_JSON_VALUE))
+                                                                                                                                                     .andExpect(status().isBadRequest())
+                                                                                                                                                     .andDo(print())
+                                                                                                                                                     .andExpect(content().string(new StringContains(requestTest.expectedMessage))));
         tests.add(test);
       }
     }
-
     return tests;
   }
 

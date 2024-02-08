@@ -19,9 +19,12 @@ public abstract class TestBase extends Assertions {
 
   @BeforeEach
   void logTest(TestInfo testInfo) {
-    String clazz = testInfo.getTestClass().orElseThrow().getName();
-    String method = testInfo.getTestMethod().orElseThrow().getName();
-
+    String clazz = testInfo.getTestClass()
+                           .orElseThrow()
+                           .getName();
+    String method = testInfo.getTestMethod()
+                            .orElseThrow()
+                            .getName();
     log.debug("Running test: {}::{}", clazz, method);
   }
 

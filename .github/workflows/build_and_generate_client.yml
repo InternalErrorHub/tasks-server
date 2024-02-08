@@ -1,44 +1,44 @@
 name: Build and generate client
 
 on:
-  push:
-    branches:
-      - main
+    push:
+        branches:
+            - main
 
 permissions:
-  contents: write
+    contents: write
 
 jobs:
-  generateClient:
-    name: Generate Client
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout project
-        uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-      - name: Setup Java
-        uses: actions/setup-java@v3
-        with:
-          java-version: '17'
-          distribution: 'temurin'
-      - name: Checkout current client
-        uses: actions/checkout@v4
-        with:
-          repository: InternalErrorHub/tasks-rest-client
-          path: tasks-rest-client
-      - name: Generate new Client
-        run: mvn --batch-mode install
-      - name: Read Version
-        run: echo "RELEASE_VERSION=$(mvn help:evaluate -Dexpression=project.version -q -DforceStdout)" >> $GITHUB_ENV
-      - name: Pushes to another repository
-        uses: cpina/github-action-push-to-another-repository@main
-        env:
-          SSH_DEPLOY_KEY: ${{ secrets.CLIENT_DEPLOY_KEY }}
-        with:
-          source-directory: 'tasks-rest-client'
-          destination-github-username: 'InternalErrorHub'
-          destination-repository-name: 'tasks-rest-client'
-          user-email: carles3@pina.cat
-          commit-message: "v${{ env.RELEASE_VERSION }}"
-          target-branch: main
+    generateClient:
+        name: Generate Client
+        runs-on: ubuntu-latest
+        steps:
+            -   name: Checkout project
+                uses: actions/checkout@v4
+                with:
+                    fetch-depth: 0
+            -   name: Setup Java
+                uses: actions/setup-java@v3
+                with:
+                    java-version: '17'
+                    distribution: 'temurin'
+            -   name: Checkout current client
+                uses: actions/checkout@v4
+                with:
+                    repository: InternalErrorHub/tasks-rest-client
+                    path: tasks-rest-client
+            -   name: Generate new Client
+                run: mvn --batch-mode install
+            -   name: Read Version
+                run: echo "RELEASE_VERSION=$(mvn help:evaluate -Dexpression=project.version -q -DforceStdout)" >> $GITHUB_ENV
+            -   name: Pushes to another repository
+                uses: cpina/github-action-push-to-another-repository@main
+                env:
+                    SSH_DEPLOY_KEY: ${{ secrets.CLIENT_DEPLOY_KEY }}
+                with:
+                    source-directory: 'tasks-rest-client'
+                    destination-github-username: 'InternalErrorHub'
+                    destination-repository-name: 'tasks-rest-client'
+                    user-email: carles3@pina.cat
+                    commit-message: "v${{ env.RELEASE_VERSION }}"
+                    target-branch: main

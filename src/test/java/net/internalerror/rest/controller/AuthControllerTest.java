@@ -48,7 +48,6 @@ class AuthControllerTest extends ControllerTestBase {
     registerRequest.setEmail("max.mustermann@gmail.com");
     registerRequest.setPassword("Passwd@123");
     assertDoesNotThrow(() -> authController.register(registerRequest));
-
     LoginRequest loginRequest = new LoginRequest();
     loginRequest.setEmail("max.mustermann@gmail.com");
     loginRequest.setPassword("Passwd@123");
@@ -71,7 +70,6 @@ class AuthControllerTest extends ControllerTestBase {
     registerRequest.setEmail("max.mustermann@gmail.com");
     registerRequest.setPassword("Passwd@123");
     assertDoesNotThrow(() -> authController.register(registerRequest));
-
     LoginRequest loginRequest = new LoginRequest();
     loginRequest.setEmail("max.mustermann@gmail.com");
     loginRequest.setPassword("Passwd@1234");

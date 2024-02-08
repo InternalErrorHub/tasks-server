@@ -37,7 +37,8 @@ class CreateTaskRequestTest extends SecuredRequestTestBase<CreateTaskRequest> {
     requestTests.add(expect(createDefaultRequest(), Messages.DUE_IS_NULL));
     requestTests.add(expect(createRequestWith("name", ""), Messages.NAME_IS_EMPTY));
     requestTests.add(expect(createRequestWith("details", ""), Messages.DETAILS_IS_EMPTY));
-    requestTests.add(expect(createRequestWith("due", Instant.now().minus(10, ChronoUnit.HOURS)), Messages.DUE_IS_IN_THE_PAST));
+    requestTests.add(expect(createRequestWith("due", Instant.now()
+                                                            .minus(10, ChronoUnit.HOURS)), Messages.DUE_IS_IN_THE_PAST));
     return requestTests;
   }
 

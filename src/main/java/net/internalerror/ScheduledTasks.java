@@ -25,23 +25,17 @@ public class ScheduledTasks {
     log.info("Scanning for expired tokens");
     Iterable<SecurityToken> securityTokens = securityTokenRepository.findAll();
     List<SecurityToken> expiredTokens = new ArrayList<>();
-
     securityTokens.forEach(securityToken -> {
       if (securityService.isTokenAlive(securityToken.getToken())) {
         expiredTokens.add(securityToken);
       }
     });
-
     log.info("Found {} expired tokens", expiredTokens.size());
-
     if (!expiredTokens.isEmpty()) {
       log.info("Removing expired tokens");
-
       securityTokenRepository.deleteAll(expiredTokens);
-
       log.info("Removed {} expired tokens", expiredTokens.size());
     }
-
   }
 
 }

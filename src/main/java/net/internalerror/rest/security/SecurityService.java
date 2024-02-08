@@ -53,7 +53,8 @@ public class SecurityService {
   }
 
   public User getUser(SecuredRequestBase securedRequest) {
-    return securityTokenRepository.findByToken(securedRequest.getToken()).getUser();
+    return securityTokenRepository.findByToken(securedRequest.getToken())
+                                  .getUser();
   }
 
   public SecurityToken getSecurityToken(User user) {
@@ -70,16 +71,16 @@ public class SecurityService {
 
   public boolean isTokenAlive(String token) {
     SecurityToken securityToken = securityTokenRepository.findByToken(token);
-    return securityToken.getValidUntil().isAfter(Instant.now());
+    return securityToken.getValidUntil()
+                        .isAfter(Instant.now());
   }
 
   public SecurityToken createSecurityToken(User user) {
     SecurityToken securityToken = new SecurityToken();
-
     securityToken.setToken(createToken(user.getEmail()));
-    securityToken.setValidUntil(Instant.now().plus(tokenLifetime, ChronoUnit.SECONDS));
+    securityToken.setValidUntil(Instant.now()
+                                       .plus(tokenLifetime, ChronoUnit.SECONDS));
     securityToken.setUser(user);
-
     securityTokenRepository.save(securityToken);
     return securityToken;
   }
@@ -89,9 +90,10 @@ public class SecurityService {
   }
 
   private String createToken(String email) {
-    String uuid = UUID.randomUUID().toString();
-    String time = LocalDateTime.now().toString();
-
+    String uuid = UUID.randomUUID()
+                      .toString();
+    String time = LocalDateTime.now()
+                               .toString();
     return passwordEncoder.encode(String.format("%s-%s-%s-%s", uuid, email, time, secret));
   }
 
@@ -106,16 +108,13 @@ public class SecurityService {
 
   public String generateSecret() {
     String charset = "abcdefghijklmnopqrstuvwxyz" + "ABCDEFGHIJKLMNOPQRSTUVWXYZ" + "0123456789";
-
     int length = random.nextInt(20, 45);
     StringBuilder secretBuilder = new StringBuilder();
-
     for (int i = 0; i < length; i++) {
       int chrIndex = random.nextInt(charset.length());
       char chr = charset.toCharArray()[chrIndex];
       secretBuilder.append(chr);
     }
-
     return secretBuilder.toString();
   }
 

@@ -26,20 +26,17 @@ public class ServerUtil {
 
   public static void checkPasswordStrength(String rawPassword) {
     RuleResult result = passwordValidator.validate(new PasswordData(rawPassword));
-
     if (!result.isValid()) {
       StringBuilder builder = new StringBuilder();
-
       List<String> messages = passwordValidator.getMessages(result);
       for (int i = 0; i < messages.size(); i++) {
         String message = messages.get(i);
-        builder.append("PASSWORD_").append(message);
+        builder.append("PASSWORD_")
+               .append(message);
         if (i != messages.size() - 1) {
           builder.append(",");
         }
-
       }
-
       throw new ValidationException(builder.toString());
     }
   }

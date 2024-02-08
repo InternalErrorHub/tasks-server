@@ -35,15 +35,12 @@ public class TaskService implements TaskControllerDefinition {
   @Override
   public CreateTaskResponse create(CreateTaskRequest request) {
     User user = securityService.getUser(request);
-
     Task task = new Task();
     task.setUser(user);
     task.setName(request.getName());
     task.setDetails(request.getDetails());
     task.setDue(request.getDue());
-
     taskRepository.save(task);
-
     return new CreateTaskResponse(task.getName(), task.getDue());
   }
 
@@ -51,7 +48,6 @@ public class TaskService implements TaskControllerDefinition {
   public ReadTaskResponse read(ReadTaskRequest request) {
     User user = securityService.getUser(request);
     Task task = taskRepository.findByUserAndNameIgnoreCase(user, request.getName());
-
     return new ReadTaskResponse(task.getName(), task.getDetails(), task.getDue());
   }
 
@@ -59,8 +55,9 @@ public class TaskService implements TaskControllerDefinition {
   public ReadAllTaskResponse readAll(ReadAllTaskRequest request) {
     User user = securityService.getUser(request);
     List<Task> tasks = taskRepository.findByUser(user);
-    List<ReadAllTaskResponse.TaskInfo> info = tasks.stream().map(task -> new ReadAllTaskResponse.TaskInfo(task.getName(), task.getDue())).toList();
-
+    List<ReadAllTaskResponse.TaskInfo> info = tasks.stream()
+                                                   .map(task -> new ReadAllTaskResponse.TaskInfo(task.getName(), task.getDue()))
+                                                   .toList();
     return new ReadAllTaskResponse(info);
   }
 
@@ -68,8 +65,16 @@ public class TaskService implements TaskControllerDefinition {
   public ReadDueTaskResponse readDue(ReadDueTaskRequest request) {
     User user = securityService.getUser(request);
     List<Task> tasks = taskRepository.findByUser(user);
-    List<Task> dueTasks = tasks.stream().filter(task -> task.getDue().isBefore(Instant.now().plus(request.getDueInfo().amount(), request.getDueInfo().unit()))).toList();
-    List<ReadAllTaskResponse.TaskInfo> info = dueTasks.stream().map(task -> new ReadAllTaskResponse.TaskInfo(task.getName(), task.getDue())).toList();
+    List<Task> dueTasks = tasks.stream()
+                               .filter(task -> task.getDue()
+                                                   .isBefore(Instant.now()
+                                                                    .plus(request.getDueInfo()
+                                                                                 .amount(), request.getDueInfo()
+                                                                                                   .unit())))
+                               .toList();
+    List<ReadAllTaskResponse.TaskInfo> info = dueTasks.stream()
+                                                      .map(task -> new ReadAllTaskResponse.TaskInfo(task.getName(), task.getDue()))
+                                                      .toList();
     return new ReadDueTaskResponse(info);
   }
 
@@ -80,7 +85,6 @@ public class TaskService implements TaskControllerDefinition {
     task.setName(request.getNewName());
     task.setDue(request.getDue());
     task.setDetails(request.getDetails());
-
     return new UpdateTaskResponse(task.getName(), task.getDetails(), task.getDue());
   }
 
@@ -88,7 +92,6 @@ public class TaskService implements TaskControllerDefinition {
   public DeleteTaskResponse delete(DeleteTaskRequest request) {
     User user = securityService.getUser(request);
     Task task = taskRepository.findByUserAndNameIgnoreCase(user, request.getName());
-
     taskRepository.delete(task);
     return new DeleteTaskResponse(task.getName());
   }

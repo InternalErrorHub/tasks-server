@@ -28,27 +28,21 @@ public class AuthController implements AuthControllerDefinition {
 
   @Override
   public RegisterResponse register(RegisterRequest request) {
-
     if (userRepository.existsByEmail(request.getEmail())) {
       throw new ValidationException(Messages.EMAIL_IS_UNAVAILABLE);
     }
-
     ServerUtil.checkPasswordStrength(request.getPassword());
-
     return authService.register(request);
   }
 
   @Override
   public LoginResponse login(LoginRequest request) {
-
     if (!userRepository.existsByEmail(request.getEmail())) {
       throw new ValidationException(Messages.EMAIL_IS_UNREGISTERED);
     }
-
     if (!securityService.passwordMatches(request.getEmail(), request.getPassword())) {
       throw new ValidationException(Messages.INVALID_CREDENTIALS);
     }
-
     return authService.login(request);
   }
 

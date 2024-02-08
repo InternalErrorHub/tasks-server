@@ -22,15 +22,12 @@ public class AuthService implements AuthControllerDefinition {
 
   @Override
   public RegisterResponse register(RegisterRequest request) {
-
     User user = new User();
     user.setFirstname(request.getFirstname());
     user.setLastname(request.getLastname());
     user.setEmail(request.getEmail());
     user.setPassword(securityService.encodePassword(request.getPassword()));
-
     userRepository.save(user);
-
     return new RegisterResponse(user.getEmail());
   }
 
@@ -38,7 +35,6 @@ public class AuthService implements AuthControllerDefinition {
   public LoginResponse login(LoginRequest request) {
     User user = userRepository.findByEmail(request.getEmail());
     SecurityToken securityToken = securityService.getSecurityToken(user);
-
     return new LoginResponse(securityToken.getToken());
   }
 

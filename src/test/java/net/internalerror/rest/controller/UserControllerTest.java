@@ -14,7 +14,6 @@ class UserControllerTest extends ControllerTestBase {
   @RepeatedTest(TEST_RUNS)
   void update() {
     DataUtil.TestCredentials testCredentials = dataUtil.createTestCredentials();
-
     UpdateUserRequest updateUserRequest = new UpdateUserRequest();
     updateUserRequest.setFirstname("Max");
     updateUserRequest.setLastname("Mustermann");
@@ -43,11 +42,10 @@ class UserControllerTest extends ControllerTestBase {
   @RepeatedTest(TEST_RUNS)
   void updateUNAUTHORIZED_REQUEST3() {
     DataUtil.TestCredentials testCredentials = dataUtil.createTestCredentials();
-
     SecurityToken securityToken = securityTokenRepository.findByToken(testCredentials.token());
-    securityToken.setValidUntil(Instant.now().minus(10, ChronoUnit.DAYS));
+    securityToken.setValidUntil(Instant.now()
+                                       .minus(10, ChronoUnit.DAYS));
     securityTokenRepository.save(securityToken);
-
     UpdateUserRequest updateUserRequest = new UpdateUserRequest();
     updateUserRequest.setFirstname("Max");
     updateUserRequest.setLastname("Mustermann");
