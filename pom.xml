@@ -26,13 +26,14 @@
     </scm>
 
     <properties>
+        <spring-boot.version>3.2.2</spring-boot.version>
         <!-- Dependencies -->
-        <spring-boot-starter.version>3.2.1</spring-boot-starter.version>
-        <spring-boot-starter-web.version>3.2.1</spring-boot-starter-web.version>
-        <spring-boot-starter-validation.version>3.2.0</spring-boot-starter-validation.version>
-        <spring-boot-starter-security.version>3.2.0</spring-boot-starter-security.version>
-        <spring-boot-starter-test.version>3.2.1</spring-boot-starter-test.version>
-        <spring-boot-starter-data-jpa.version>3.2.1</spring-boot-starter-data-jpa.version>
+        <spring-boot-starter.version>                   ${spring-boot.version}</spring-boot-starter.version>
+        <spring-boot-starter-web.version>               ${spring-boot.version}</spring-boot-starter-web.version>
+        <spring-boot-starter-validation.version>        ${spring-boot.version}</spring-boot-starter-validation.version>
+        <spring-boot-starter-security.version>          ${spring-boot.version}</spring-boot-starter-security.version>
+        <spring-boot-starter-test.version>              ${spring-boot.version}</spring-boot-starter-test.version>
+        <spring-boot-starter-data-jpa.version>          ${spring-boot.version}</spring-boot-starter-data-jpa.version>
         <junit-platform-suite-engine.version>1.8.1</junit-platform-suite-engine.version>
         <lombok.version>1.18.30</lombok.version>
         <h2.version>2.2.224</h2.version>
@@ -41,7 +42,7 @@
         <springdoc-openapi-starter-webmvc-ui.version>2.1.0</springdoc-openapi-starter-webmvc-ui.version>
 
         <!-- Plugins -->
-        <spring-boot-maven-plugin.version>3.2.0</spring-boot-maven-plugin.version>
+        <spring-boot-maven-plugin.version>${spring-boot.version}</spring-boot-maven-plugin.version>
         <jacoco-maven-plugin.version>0.8.10</jacoco-maven-plugin.version>
         <maven-surefire-plugin.version>3.0.0</maven-surefire-plugin.version>
         <springdoc-openapi-maven-plugin.version>1.4</springdoc-openapi-maven-plugin.version>
@@ -116,11 +117,6 @@
             <groupId>org.springdoc</groupId>
             <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
             <version>${springdoc-openapi-starter-webmvc-ui.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-thymeleaf</artifactId>
-            <version>3.2.2</version>
         </dependency>
     </dependencies>
 
