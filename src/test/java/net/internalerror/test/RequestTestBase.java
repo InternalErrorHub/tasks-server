@@ -59,7 +59,6 @@ public abstract class RequestTestBase<R extends RequestBase> extends TestBase {
         DynamicTest test = DynamicTest.dynamicTest(String.format("repetition %s of %s: %s", i, TEST_RUNS, requestTest.expectedMessage), () -> mockMvc.perform(requestBuilder.content(json)
                                                                                                                                                                             .contentType(MediaType.APPLICATION_JSON_VALUE))
                                                                                                                                                      .andExpect(status().isBadRequest())
-                                                                                                                                                     .andDo(print())
                                                                                                                                                      .andExpect(content().string(new StringContains(requestTest.expectedMessage))));
         tests.add(test);
       }
